@@ -5,9 +5,7 @@ public class LeagueInvaders {
 	JFrame frame;
 	final int WIDTH = 500;
 	final int HEIGHT = 800;
-	final int MENU = 0;
-    final int GAME = 1;
-    final int END = 2;
+	
 	
 	public LeagueInvaders() {
 		frame = new JFrame();
