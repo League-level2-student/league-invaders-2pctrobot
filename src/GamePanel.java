@@ -3,11 +3,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements ActionListener{
+public class GamePanel extends JPanel implements ActionListener,KeyListener{
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	Font subFont = new Font("Arial", Font.PLAIN, 32);
 	Timer frameDraw;
@@ -20,13 +22,13 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	public void updateMenuState() {  
-		
+		drawMenuState(null);
 	}
 	public void updateGameState() {  
-		
+		drawGameState(null);
 	}
 	public void updateEndState() {  
-		
+		drawEndState(null);
 	}
 	public void drawMenuState(Graphics g) {  
 		g.setColor(Color.BLUE);
@@ -59,15 +61,38 @@ public class GamePanel extends JPanel implements ActionListener{
 	        drawEndState(g);
 	    }
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+		    if (currentState == END) {
+		        currentState = MENU;
+		    } else {
+		        currentState++;
+		    }
+		} 
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Action");
-		if(currentState == MENU){
-		    updateMenuState();
-		}else if(currentState == GAME){
-		    updateGameState();
-		}else if(currentState == END){
-		    updateEndState();
-		}
+		// TODO Auto-generated method stub
+		
 	}
+	
+
+	
+	
 }
