@@ -19,16 +19,17 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
     int currentState = MENU;
 	public GamePanel(){
 		frameDraw = new Timer(1000/60,this);
+		frameDraw.start();
 	}
 	
 	public void updateMenuState() {  
-		drawMenuState(null);
+		
 	}
 	public void updateGameState() {  
-		drawGameState(null);
+		
 	}
 	public void updateEndState() {  
-		drawEndState(null);
+		
 	}
 	public void drawMenuState(Graphics g) {  
 		g.setColor(Color.BLUE);
@@ -54,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
 		g.fillRect(10, 10, 100, 100);
 		
 	    if(currentState == MENU){
-	        drawMenuState(g);
+	    	drawMenuState(g);
 	    }else if(currentState == GAME){
 	        drawGameState(g);
 	    }else if(currentState == END){
@@ -77,6 +78,18 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
 		        currentState++;
 		    }
 		} 
+		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		    System.out.println("UP");
+		}
+		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
+		    System.out.println("DOWN");
+		}
+		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+		    System.out.println("LEFT");
+		}
+		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		    System.out.println("RIGHT");
+		}
 		
 	}
 
@@ -88,8 +101,15 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
+		System.out.println("action");
+		repaint();
 	}
 	
 
