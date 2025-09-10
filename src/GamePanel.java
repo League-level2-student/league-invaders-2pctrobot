@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements ActionListener,KeyListener{
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	Font subFont = new Font("Arial", Font.PLAIN, 32);
+	Rocketship ship = new Rocketship(250,700,50,50);
 	Timer frameDraw;
 	final int MENU = 0;
     final int GAME = 1;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
 	public void drawGameState(Graphics g) { 
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 800);
+		ship.draw(g);
 	}
 	public void drawEndState(Graphics g) {  
 		g.setColor(Color.RED);
@@ -80,16 +82,21 @@ public class GamePanel extends JPanel implements ActionListener,KeyListener{
 		} 
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
+		    ship.up();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 		    System.out.println("DOWN");
+		    ship.down();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 		    System.out.println("LEFT");
+		    ship.left();
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		    System.out.println("RIGHT");
+		    ship.right();
 		}
+		
 		
 	}
 
