@@ -1,7 +1,34 @@
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ObjectManager {
  Rocketship argo;
- public ObjectManager() {
+ Random random;
+ ArrayList<Projectile> projectiles = new ArrayList<>();
+ ArrayList<Alien> aliens = new ArrayList<>();
+ public ObjectManager(Rocketship argo) {
+	 this.argo=argo;
+ }
+ void addProjectile(Projectile project) {
+	 projectiles.add(project);
+ }
+ void addAlien(Alien xeno) {
+	 aliens.add(new Alien(random.nextInt(500),0,50,50));
+ }
+ void update() {
+	 for(int i = 0; i < aliens.size(); i++) {
+		 if(aliens.get(i).height > 800) {
+			 aliens.get(i).isActive = false;
+		 }
+	 }
+	 for(int i = 0; i < projectiles.size(); i++) {
+		 if(projectiles.get(i).height > 800) {
+			 projectiles.get(i).isActive = false;
+		 }
+	 }
+ }
+ void draw(Graphics g) {
 	 
  }
 }
