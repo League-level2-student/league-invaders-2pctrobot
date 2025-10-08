@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = MENU;
 
 	public GamePanel() {
-		frameDraw = new Timer(1000 / 60, this);
+		frameDraw = new Timer(1000/60, this);
 		frameDraw.start();
 
 		if (needImage) {
@@ -45,7 +45,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-
+		obj.update();
+		//startGame();
+		alienSpawn = new Timer(1000/5 , obj);
 	}
 
 	public void updateEndState() {
@@ -53,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void startGame() {
-		alienSpawn = new Timer(1000 , obj);
+		alienSpawn = new Timer(1000/5 , obj);
 	    alienSpawn.start();
 	}
 
@@ -88,7 +90,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(0, 0, 500, 800);
 		}
 		obj.draw(g);
-		startGame();
+	//	startGame();
 	}
 
 	public void drawEndState(Graphics g) {
@@ -176,6 +178,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			updateMenuState();
 		} else if (currentState == GAME) {
 			updateGameState();
+			startGame();
 		} else if (currentState == END) {
 			updateEndState();
 		}

@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class ObjectManager implements ActionListener {
@@ -9,6 +10,7 @@ public class ObjectManager implements ActionListener {
 	Random random;
 	ArrayList<Projectile> projectiles = new ArrayList<>();
 	ArrayList<Alien> aliens = new ArrayList<>();
+	int timer =0;
 
 	public ObjectManager(Rocketship argo) {
 		this.argo = argo;
@@ -19,22 +21,46 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void addAlien(Alien xeno) {
+		random = new Random();
 		aliens.add(new Alien(random.nextInt(500), 0, 50, 50));
 	}
 
 	void update() {
 		for (int i = 0; i < aliens.size(); i++) {
-			if (aliens.get(i).height > 800) {
+			aliens.get(i).update();
+			if (aliens.get(i).y >= 800) {
 				aliens.get(i).isActive = false;
 			}
 		}
+		remove();
+		
 		for (int i = 0; i < projectiles.size(); i++) {
-			if (projectiles.get(i).height > 800) {
+			if (projectiles.get(i).y >= 800) {
 				projectiles.get(i).isActive = false;
 			}
 		}
+		remove();
 	}
-
+	
+	void remove() {
+		Iterator<Alien> ita = aliens.iterator();
+		while (ita.hasNext()) {
+			Alien eachAlien = ita.next();
+			if(!eachAlien.isActive) {
+				ita.remove();
+				System.out.println("POW!");
+			}
+		}
+		Iterator<Projectile> itp = projectiles.iterator();
+		while (itp.hasNext()) {
+			Projectile eachPro = itp.next();
+			if(!eachPro.isActive) {
+				itp.remove();
+				System.out.println("POW!");
+			}
+		}
+	}
+	
 	void draw(Graphics g) {
 		argo.draw(g);
 		for (int i = 0; i < aliens.size(); i++) {
@@ -48,6 +74,8 @@ public class ObjectManager implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		addAlien(null);
+		Alien morph = new Alien(10, 10, 10, 10);
+		addAlien(morph);
+		
 	}
 }
