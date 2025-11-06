@@ -14,6 +14,7 @@ public class ObjectManager implements ActionListener {
 
 	public ObjectManager(Rocketship argo) {
 		this.argo = argo;
+		
 	}
 
 	void addProjectile(Projectile project) {
@@ -36,6 +37,7 @@ public class ObjectManager implements ActionListener {
 		remove();
 		
 		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).update();
 			if (projectiles.get(i).y >= 800) {
 				projectiles.get(i).isActive = false;
 			}
@@ -49,7 +51,7 @@ public class ObjectManager implements ActionListener {
 			Alien eachAlien = ita.next();
 			if(!eachAlien.isActive) {
 				ita.remove();
-				System.out.println("POW!");
+				
 			}
 		}
 		Iterator<Projectile> itp = projectiles.iterator();
@@ -57,7 +59,7 @@ public class ObjectManager implements ActionListener {
 			Projectile eachPro = itp.next();
 			if(!eachPro.isActive) {
 				itp.remove();
-				System.out.println("POW!");
+				
 			}
 		}
 	}

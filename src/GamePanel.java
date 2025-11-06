@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		obj.update();
+		ship.update();
 		//startGame();
 		//alienSpawn = new Timer(1000/5 , obj);
 	}
@@ -127,88 +128,66 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				}
 			}
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("LD");
-			ship.left();
-			ship.down();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("RD");
-			ship.right();
-			ship.down();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("LU");
-			ship.left();
-			ship.up();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("RU");
-			ship.right();
-			ship.up();
-		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("UP");
-			ship.up();
+			ship.ru = ship.rd == 0 ? -10 : -20;
+			System.out.println("1");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("DOWN");
-			ship.down();
+			ship.rd = ship.ru == 0 ? 10 : 20;
+			System.out.println("2");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("LEFT");
-			ship.left();
+			ship.rl = ship.rr == 0 ? -10 : -20;
+			//ship.left();
+			System.out.println("3");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			System.out.println("RIGHT");
-			ship.right();
+			ship.rr = ship.rl == 0 ? 10 : 20;
+			//ship.right();
+			System.out.println("4");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			obj.addProjectile(ship.getProjectile());
+			System.out.println("5");
 		}
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("LD");
-			ship.left();
-			ship.down();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("RD");
-			ship.right();
-			ship.down();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("LU");
-			ship.left();
-			ship.up();
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("RU");
-			ship.right();
-			ship.up();
-		}
+		
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("UP");
-			ship.up();
+			ship.ru=0;
+			if(ship.rd > 10) {
+				ship.rd = 10;
+			}
+			System.out.println("1");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("DOWN");
-			ship.down();
+			ship.rd=0;
+			if(ship.ru < -10) {
+				ship.ru = -10;
+			}
+			System.out.println("2");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("LEFT");
-			ship.left();
+			ship.rl=0;
+			if(ship.rr > 10) {
+				ship.rr = 10;
+			}
+			System.out.println("3");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			System.out.println("RIGHT");
-			ship.right();
+			ship.rr=0;
+			if(ship.rl < -10) {
+				ship.rl = -10;
+			}
+			System.out.println("4");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			obj.addProjectile(ship.getProjectile());
+			System.out.println("5");
 		}
 
 
@@ -223,7 +202,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (currentState == END) {
 			updateEndState();
 		}
-		System.out.println("action");
+		//System.out.println("action");
 		repaint();
 	}
 
