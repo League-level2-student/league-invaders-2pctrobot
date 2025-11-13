@@ -18,7 +18,6 @@ public class Alien extends GameObject {
 	}
 
 	public void update() {
-		super.update();
 		y += speed;
 		super.update();
 	}

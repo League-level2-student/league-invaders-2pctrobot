@@ -14,13 +14,13 @@ public class GameObject {
 		y = ys;
 		width = w;
 		height = h;
-
-		isActive = true;
+		collisionBox = new Rectangle();
+		isActive = false;
 		
 	}
 
 	public void update() {
-		//collisionBox.setBounds(x, y, width, height);
+		collisionBox.setBounds(x, y, width, height);
 		
 	}
 }

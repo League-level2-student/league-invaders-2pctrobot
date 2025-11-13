@@ -11,7 +11,6 @@ public class ObjectManager implements ActionListener {
 	ArrayList<Projectile> projectiles = new ArrayList<>();
 	ArrayList<Alien> aliens = new ArrayList<>();
 	int timer =0;
-
 	public ObjectManager(Rocketship argo) {
 		this.argo = argo;
 		
@@ -43,6 +42,9 @@ public class ObjectManager implements ActionListener {
 			}
 		}
 		remove();
+		
+		checkCollision();
+		remove();
 	}
 	
 	void remove() {
@@ -63,7 +65,24 @@ public class ObjectManager implements ActionListener {
 			}
 		}
 	}
-	
+	void checkCollision() {
+		for (int i = 0; i < aliens.size(); i++) {
+			if(argo.collisionBox.intersects(aliens.get(i).collisionBox)) {
+				//aliens.get(i).isActive = false;
+				argo.isActive = true;
+				System.out.println("alright");
+			}
+			for (int j = 0; j < projectiles.size(); j++) {
+				if(aliens.get(i).collisionBox.intersects(projectiles.get(j).collisionBox)) {
+					aliens.get(i).isActive = false;
+					projectiles.get(j).isActive = false;
+				}
+			}
+		}
+		if(!argo.isActive) {
+					System.out.println("good");
+				}
+	}
 	void draw(Graphics g) {
 		argo.draw(g);
 		for (int i = 0; i < aliens.size(); i++) {
