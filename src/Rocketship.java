@@ -14,8 +14,10 @@ public class Rocketship extends GameObject {
 	int rd = 0;
 	int rl = 0;
 	int rr = 0;
+	int alive = 0;
 	public Rocketship(int xs, int ys, int w, int h) {
 		super(xs, ys, w, h);
+		this.isActive=true;
 		speed = 10;
 		if (needImage) {
 			loadImage("rocket.png");

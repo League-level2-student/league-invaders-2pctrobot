@@ -15,7 +15,6 @@ public class GameObject {
 		width = w;
 		height = h;
 		collisionBox = new Rectangle();
-		isActive = false;
 		
 	}
 

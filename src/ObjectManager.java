@@ -33,7 +33,6 @@ public class ObjectManager implements ActionListener {
 				aliens.get(i).isActive = false;
 			}
 		}
-		remove();
 		
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
@@ -41,9 +40,9 @@ public class ObjectManager implements ActionListener {
 				projectiles.get(i).isActive = false;
 			}
 		}
-		remove();
 		
 		checkCollision();
+		
 		remove();
 	}
 	
@@ -51,7 +50,8 @@ public class ObjectManager implements ActionListener {
 		Iterator<Alien> ita = aliens.iterator();
 		while (ita.hasNext()) {
 			Alien eachAlien = ita.next();
-			if(!eachAlien.isActive) {
+			if(eachAlien.isActive = false) {
+				System.out.println("trying to remove");
 				ita.remove();
 				
 			}
@@ -59,7 +59,7 @@ public class ObjectManager implements ActionListener {
 		Iterator<Projectile> itp = projectiles.iterator();
 		while (itp.hasNext()) {
 			Projectile eachPro = itp.next();
-			if(!eachPro.isActive) {
+			if(eachPro.isActive = false) {
 				itp.remove();
 				
 			}
@@ -68,9 +68,13 @@ public class ObjectManager implements ActionListener {
 	void checkCollision() {
 		for (int i = 0; i < aliens.size(); i++) {
 			if(argo.collisionBox.intersects(aliens.get(i).collisionBox)) {
-				//aliens.get(i).isActive = false;
-				argo.isActive = true;
+				aliens.get(i).isActive = false;
+				argo.isActive = false;
+				argo.alive = 55;
 				System.out.println("alright");
+				if(argo.isActive == false) {
+					System.out.println("kind of good");
+				}
 			}
 			for (int j = 0; j < projectiles.size(); j++) {
 				if(aliens.get(i).collisionBox.intersects(projectiles.get(j).collisionBox)) {
@@ -78,8 +82,9 @@ public class ObjectManager implements ActionListener {
 					projectiles.get(j).isActive = false;
 				}
 			}
+			remove();
 		}
-		if(!argo.isActive) {
+		if(argo.isActive = false) {
 					System.out.println("good");
 				}
 	}
@@ -99,5 +104,13 @@ public class ObjectManager implements ActionListener {
 		Alien morph = new Alien(10, 10, 10, 10);
 		addAlien(morph);
 		
+	}
+
+	public void purge() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < aliens.size(); i++) {
+		aliens.get(i).isActive=false;	
+		System.out.println("set inactive");
+		}remove();
 	}
 }

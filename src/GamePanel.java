@@ -47,9 +47,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() {
 		obj.update();
 		ship.update();
-		if(ship.isActive = true) {
+		if(ship.alive==55) {
 			System.out.println("wow");
 			currentState = END;
+			
 		}
 		//startGame();
 		//alienSpawn = new Timer(1000/5 , obj);
@@ -60,8 +61,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void startGame() {
+		ship = new Rocketship(250, 700, 50, 50);
+		obj = new ObjectManager(ship);
 		alienSpawn = new Timer(500/5 , obj);
+		ship.alive=0;
+		ship.isActive=true;
+		System.out.println("start");
 	    alienSpawn.start();
+	    obj.purge();
 	}
 
 	void loadImage(String imageFile) {
@@ -124,9 +131,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+				
 				currentState = MENU;
+				
 			} else {
 				currentState++;
+				
 				if(currentState == GAME) {
 					startGame();
 				}
