@@ -13,7 +13,7 @@ public class ObjectManager implements ActionListener {
 	int timer =0;
 	public ObjectManager(Rocketship argo) {
 		this.argo = argo;
-		
+
 	}
 
 	void addProjectile(Projectile project) {
@@ -23,7 +23,7 @@ public class ObjectManager implements ActionListener {
 	void addAlien(Alien xeno) {
 		random = new Random();
 		aliens.add(new Alien(random.nextInt(500), 0, 50, 50));
-		
+
 	}
 
 	void update() {
@@ -33,27 +33,28 @@ public class ObjectManager implements ActionListener {
 				aliens.get(i).isActive = false;
 			}
 		}
-		
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
 			if (projectiles.get(i).y >= 800) {
 				projectiles.get(i).isActive = false;
 			}
 		}
-		
+
 		checkCollision();
+		purge();
+
 		
-		remove();
 	}
-	
-	void remove() {
+
+	/*void remove() {
 		Iterator<Alien> ita = aliens.iterator();
 		while (ita.hasNext()) {
 			Alien eachAlien = ita.next();
 			if(eachAlien.isActive = false) {
 				System.out.println("trying to remove");
 				ita.remove();
-				
+
 			}
 		}
 		Iterator<Projectile> itp = projectiles.iterator();
@@ -61,32 +62,33 @@ public class ObjectManager implements ActionListener {
 			Projectile eachPro = itp.next();
 			if(eachPro.isActive = false) {
 				itp.remove();
-				
+
 			}
 		}
-	}
+	}*/
 	void checkCollision() {
 		for (int i = 0; i < aliens.size(); i++) {
-			if(argo.collisionBox.intersects(aliens.get(i).collisionBox)) {
-				aliens.get(i).isActive = false;
-				argo.isActive = false;
-				argo.alive = 55;
-				System.out.println("alright");
-				if(argo.isActive == false) {
-					System.out.println("kind of good");
-				}
-			}
 			for (int j = 0; j < projectiles.size(); j++) {
+			
+				if(argo.collisionBox.intersects(aliens.get(i).collisionBox)) {
+					aliens.get(i).isActive = false;
+					argo.isActive = false;
+					argo.alive = 55;
+					System.out.println("alright");
+					
+				}
+				
 				if(aliens.get(i).collisionBox.intersects(projectiles.get(j).collisionBox)) {
 					aliens.get(i).isActive = false;
 					projectiles.get(j).isActive = false;
+				
 				}
 			}
-			remove();
+			
 		}
 		if(argo.isActive = false) {
-					System.out.println("good");
-				}
+			System.out.println("good");
+		}
 	}
 	void draw(Graphics g) {
 		argo.draw(g);
@@ -103,14 +105,22 @@ public class ObjectManager implements ActionListener {
 		// TODO Auto-generated method stub
 		Alien morph = new Alien(10, 10, 10, 10);
 		addAlien(morph);
-		
+
 	}
 
 	public void purge() {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < aliens.size(); i++) {
-		aliens.get(i).isActive=false;	
-		System.out.println("set inactive");
-		}remove();
+			if(aliens.get(i).isActive==false) {
+				aliens.remove(i);
+			}
+		}
+		
+		for (int i = 0; i < projectiles.size(); i++) {
+			if(projectiles.get(i).isActive==false) {
+				projectiles.remove(i);
+			}	
+		}
 	}
 }
+

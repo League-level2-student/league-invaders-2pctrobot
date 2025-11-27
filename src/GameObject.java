@@ -6,7 +6,7 @@ public class GameObject {
 	int width;
 	int height;
 	int speed;
-	boolean isActive;
+	boolean isActive = true;
 	Rectangle collisionBox;
 
 	public GameObject(int xs, int ys, int w, int h) {
@@ -14,7 +14,7 @@ public class GameObject {
 		y = ys;
 		width = w;
 		height = h;
-		collisionBox = new Rectangle();
+		collisionBox = new Rectangle(x,y,width,height);
 		
 	}
 
