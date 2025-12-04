@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
 public class ObjectManager implements ActionListener {
 	Rocketship argo;
+	int score = 0;
 	Random random;
 	ArrayList<Projectile> projectiles = new ArrayList<>();
 	ArrayList<Alien> aliens = new ArrayList<>();
-	int timer =0;
+	int timer = 0;
 	public ObjectManager(Rocketship argo) {
 		this.argo = argo;
 
@@ -98,6 +101,9 @@ public class ObjectManager implements ActionListener {
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).draw(g);
 		}
+	}
+	public void getScore(int score, JPanel panel) {
+		
 	}
 
 	@Override

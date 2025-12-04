@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -11,7 +12,8 @@ public class Alien extends GameObject {
 
 	public Alien(int xs, int ys, int w, int h) {
 		super(xs, ys, w, h);
-		speed = 10;
+		Random r = new Random();
+		speed = r.nextInt(15)+5;
 		if (needImage) {
 			loadImage("alien.png");
 		}
@@ -42,4 +44,6 @@ public class Alien extends GameObject {
 			needImage = false;
 		}
 	}
+	
+	
 }

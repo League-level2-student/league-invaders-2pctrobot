@@ -47,11 +47,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void updateGameState() {
 		obj.update();
 		ship.update();
-		/*if(ship.alive==55) {
+		if(ship.alive==55) {
 			System.out.println("wow");
 			currentState = END;
 			
-		}*/
+		}
 		//startGame();
 		//alienSpawn = new Timer(1000/5 , obj);
 	}
