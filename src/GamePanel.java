@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	Font subFont = new Font("Arial", Font.PLAIN, 32);
+	Font scoreFont = new Font("Arial", Font.PLAIN, 20);
 	Rocketship ship = new Rocketship(250, 700, 50, 50);
 		ObjectManager obj = new ObjectManager(ship);
 	Timer frameDraw;
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (needImage) {
 			loadImage("space.png");
 		}
+		
 	}
 
 	public void updateMenuState() {
@@ -101,6 +103,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.setColor(Color.BLUE);
 			g.fillRect(0, 0, 500, 800);
 		}
+		g.setFont(scoreFont);
+		g.setColor(Color.YELLOW);
+		g.drawString("Score: "+obj.getScore(), 20, 100);
 		obj.draw(g);
 	//	startGame();
 	}
@@ -108,6 +113,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, 500, 800);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		g.drawString("GAME OVER!", 90, 100);
+		g.setFont(subFont);
+		g.drawString("Score: "+obj.getScore(), 180, 400);
+		g.drawString("Press ENTER to reset", 95, 600);
 	}
 
 	public void paintComponent(Graphics g) {

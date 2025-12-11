@@ -102,8 +102,8 @@ public class ObjectManager implements ActionListener {
 			projectiles.get(i).draw(g);
 		}
 	}
-	public void getScore(int score, JPanel panel) {
-		
+	public int getScore() {
+		return(score);
 	}
 
 	@Override
@@ -125,6 +125,7 @@ public class ObjectManager implements ActionListener {
 		for (int i = 0; i < projectiles.size(); i++) {
 			if(projectiles.get(i).isActive==false) {
 				projectiles.remove(i);
+				score ++;
 			}	
 		}
 	}
